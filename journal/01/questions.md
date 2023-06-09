@@ -28,13 +28,13 @@
     > Good design can influence whether people with disabilities can use your website. It can also convey mood through colors and layout along with guild the readers attention.
 
 08. What is the purpose of ***wireframing***?
-    > | ANSWER HERE |
+    > It is a quick way to format website ideas and themes with clients for developers to use as a reference.
 
 09. Do you think wireframes are worth the time, energy, and effort that they require? Why or Why not?
-    > | ANSWER HERE |
+    > I think wireframe is worth the time as it is much quicker to create a design and adjust aspects of a website during the brainstorming process.
 
 10. Define the display `:flex property:`
-    > | ANSWER HERE |
+    > Display flex allows users to manipulate elements in an easier and more dynamic way.
 
 11. What `CSS` properties affect the size of a box model?
-    > | ANSWER HERE |
+    > The properties that affect box model size are margin, border, padding, and content.
