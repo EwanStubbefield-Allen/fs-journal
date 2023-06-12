@@ -1,15 +1,15 @@
 # Intro to JavaScript
 01. Which keywords are used to declare a variable in JavaScript?
 
-    > | ANSWER HERE |
+    > let, var, and const
 
 02. What is the definition of a function?
 
-    > | ANSWER HERE |
+    > A function is a subprogram created to complete a specific job.
 
 03. What are the `SOLID` principles?
 
-    > | ANSWER HERE |
+    > 
 
 04. Given this array: How could you remove the `pineapple`?
 
@@ -17,7 +17,7 @@
     let fruit = ['apple', 'banana', 'pineapple', 'orange', 'strawberry']
     ```
 
-    > | ANSWER HERE |
+    > fruit.splice[2, 1]
 
 05. Given these two objects: How could you add each to the others friends arrays?
 
@@ -34,24 +34,29 @@
     }
     ```
 
-    > | ANSWER HERE |
+    > you.friends = them.name
+      them.friends = you.name
 
 06. Give an example of a JavaScript `Conditional`:
 
-    > | ANSWER HERE |
+    > if (i == 1) {
+        console.log(true)
+      }
 
 07. What is the main difference between `parameters` and `arguments`?
 
-    > | ANSWER HERE |
+    > An argument is the value given to the function, whereas parameters are the values given when defining a function.
 
 08. Instead of writing everything to the console, what is a better way to debug your code?
 
-    > | ANSWER HERE |
+    > You can use the developer tools.
 
 09. What is the difference between a `primitive` value and a `reference` value?
 
-    > | ANSWER HERE |
+    > A primitive value is a hard-coded number or string that does not change, whereas a reference value is a number of string that is can be changed.
 
 10. Demonstrate a loop that prints the numbers between -100 and 100?
 
-    > | ANSWER HERE |
+    > for (let i = -100; i <= 100; i++) {
+        console.log(i)
+      }
