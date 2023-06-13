@@ -34,13 +34,13 @@
     }
     ```
 
-    > you.friends = them.name
-      them.friends = you.name
+    > you.friends.push(them.name)
+      them.friends.push(you.name)
 
 06. Give an example of a JavaScript `Conditional`:
 
     > if (i == 1) {
-        console.log(true)
+        console.log('true')
       }
 
 07. What is the main difference between `parameters` and `arguments`?
@@ -53,7 +53,7 @@
 
 09. What is the difference between a `primitive` value and a `reference` value?
 
-    > A primitive value is a hard-coded number or string that does not change, whereas a reference value is a number of string that is can be changed.
+    > A primitive value is a number, string, or boolean, whereas a reference value is an array or object.
 
 10. Demonstrate a loop that prints the numbers between -100 and 100?
 
