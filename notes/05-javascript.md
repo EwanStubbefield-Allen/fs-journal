@@ -20,3 +20,13 @@
   string.toUpperCase --> uppercase all character
   string.toLowerCase --> lowercase all character
   string.includes(phrase)
+
+<!-- SECTION Number Methods -->
+  variable.toString() --> turns number to strings
+  variable.toFixed(number) --> adds required amount of numbers after decimal
+
+<!-- SECTION Window Methods -->
+  window.alert(text) --> window with text
+  window.confirm(text) --> allows window to have option
+  window.prompt(text) --> allows user to type in window
+  window.location.reload(text) --> refreshes page
