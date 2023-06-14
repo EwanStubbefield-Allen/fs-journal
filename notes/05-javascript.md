@@ -15,3 +15,8 @@
   Math.random()
   Math.floor(number) --> rounds number down
   Math.ceil(number) --> rounds number up
+
+<!-- SECTION String Methods -->
+  string.toUpperCase --> uppercase all character
+  string.toLowerCase --> lowercase all character
+  string.includes(phrase)
