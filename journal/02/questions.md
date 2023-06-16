@@ -9,7 +9,11 @@
 
 03. What are the `SOLID` principles?
 
-    > 
+    > S. single responsibility
+      O. open-closed
+      L. liskov substitution
+      I. interface segregation
+      D. dependency inversion
 
 04. Given this array: How could you remove the `pineapple`?
 
@@ -23,14 +27,14 @@
 
     ```js
     let you = {
-        name: "You",
-        hair: true,
-        friends: []
+      name: "You",
+      hair: true,
+      friends: []
     }
     let them = {
-        name: "Them",
-        hair: false,
-        friends: []
+      name: "Them",
+      hair: false,
+      friends: []
     }
     ```
 
