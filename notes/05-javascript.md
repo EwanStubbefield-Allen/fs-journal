@@ -18,7 +18,8 @@
 
 <!-- SECTION Object Methods -->
   let object { ...previous object } --> dumps all previous object into object
-  Object.values(object) --> returns every key
+  Object.values(object) --> returns values in an array
+  Object.keys(keys) --> returns keys in an array
 
 <!-- SECTION Math Methods -->
   Math.random()
