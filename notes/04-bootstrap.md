@@ -48,6 +48,8 @@
       rounded
       rounded-circle
       img-fluid
+      selectable
+      elevation-(1-5)
 
     <!-- SECTION Button -->
       btn

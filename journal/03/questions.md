@@ -1,7 +1,7 @@
 # Application Architecture, MVC Design Pattern
 01. What are the Pillars of Object Oriented Programming (`OOP`)?
   
-  > 
+  > The pillars are: abstraction, encapsulation, inheritance, and polymorphism.
 
 02. How does `export` differ from `export default`?
   
@@ -13,7 +13,7 @@
 
 04. What are some of the benefits of the `Proxy` object that we are using in our structure for applications?
   
-  > | ANSWER HERE |
+  > The Proxy object adds security to the variables.
 
 05. What the difference between a `class` and an instance of a `class`?
   
@@ -29,12 +29,12 @@
 
 08. What is the job of the `Controller` in the `MVC` Pattern?
   
-  > | ANSWER HERE |
+  > The controller dictates the user's abilities and updates the view.
 
 09. What is the job of the `Service` in `MVC`?
   
-  > | ANSWER HERE |
+  > The service modifies information.
 
 10. What is the job of the `Model` in `MVC`?
   
-  > | ANSWER HERE |
+  > The model tracks information.
