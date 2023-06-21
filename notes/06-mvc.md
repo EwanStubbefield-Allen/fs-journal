@@ -1,12 +1,24 @@
 # MVC
 
 View --> App --> Router --> Controller --> Service --> Models(AppState)
-View --> User interacts
-Router --> Contains all controllers to be used from HTML
 AppState --> Where all global variables are stored
 Constructor --> Runs on class initialization
   AppState.on('variable', function) --> when variable changes run function
   AppState.emit('variable') --> manually activates the listener
+
+<!-- SECTION Router -->
+  Router --> Contains all controllers to be used from HTML
+  export const router = [
+    {
+      path: `#/`,
+      controller: ,
+      view: `HTML`
+    }
+  ]
+
+<!-- SECTION View -->
+  View --> User interacts
+  export const view = `HTML`
 
 <!-- SECTION Controller -->
   Controller --> Dictates user abilities

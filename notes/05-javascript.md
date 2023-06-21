@@ -9,15 +9,16 @@
   let variable = array.shift() --> removes first item from array and stores it
   let variable = array.pop() --> removes last item from array and stores it
   let variable = array.slice(firstPosition, lastPosition) --> returns section from firstPosition to last
+  let variable = array.includes(variable) --> returns a boolean if array contains variable
+  let variable = array.join(between each item) --> creates a string from array
+  let variable = array.reverse() --> reverses array order
   array.forEach(object => {do something to each object}) --> changes each object
-  array.split(when to split) --> breaks up objects into array
-  array.join(between each item) --> creates a string from array
   array.unshift(variable) --> puts variable at beginning of array
   array.push(variable) --> pushes variable to end of array
-  array.includes(variable) --> returns a boolean if array contains variable
+  array.splice(index) --> removes value at said index
 
 <!-- SECTION Object Methods -->
-  let object { ...previous object } --> dumps all previous object into object
+  let object = { ...previous object } --> dumps all previous object into object
   Object.values(object) --> returns values in an array
   Object.keys(keys) --> returns keys in an array
 
@@ -27,8 +28,9 @@
   Math.ceil(number) --> rounds number up
 
 <!-- SECTION String Methods -->
-  string.toUpperCase() --> uppercase all character
-  string.toLowerCase() --> lowercase all character
+  let variable = string.toUpperCase() --> uppercase all character
+  let variable = string.toLowerCase() --> lowercase all character
+  let variable = string.split(when to split) --> breaks up objects into array
 
 <!-- SECTION Number Methods -->
   variable.toString() --> turns number to strings
@@ -41,5 +43,11 @@
   window.location.reload(text) --> refreshes page
   window.event.preventDefault() --> prevents the default action
 
+<!-- SECTION Date Methods -->
+  new Date('date') --> returns specified date else current date
+  Date.toLocaleString() --> formats date into standard format
+  
 <!-- SECTION Special Functions -->
   setInterval(function or {() => code}, ms) --> runs function repeatedly every ms
+  let function = (condition) => {} --> equivalent to a function
+  let variable = condition ? val1 : val2 --> if true return var1 if false return val2

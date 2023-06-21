@@ -40,6 +40,7 @@
     <!-- SECTION Colors -->
       bg-(parameter)
       text-(parameter)
+      text-bg-(parameter)
 
     <!-- SECTION Text -->
       fs-(1-5)
