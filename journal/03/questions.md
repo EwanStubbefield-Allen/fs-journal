@@ -13,19 +13,19 @@
 
 04. What are some of the benefits of the `Proxy` object that we are using in our structure for applications?
   
-  > The Proxy object adds security to the variables.
+  > The Proxy object adds security to the variables to prevent users from accessing them.
 
 05. What the difference between a `class` and an instance of a `class`?
   
-  > | ANSWER HERE |
+  > A class describes properties the instance has whereas the instance of a class is the object created from a class.
 
 06. What is a computed Property?
   
-  > | ANSWER HERE |
+  > A computed property is a value that is capable of retaining information from other values
 
 07. What is the purpose of the `MVC` pattern?
   
-  > | ANSWER HERE |
+  > It is a method that separates the users abilities from other functions.
 
 08. What is the job of the `Controller` in the `MVC` Pattern?
   
