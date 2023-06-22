@@ -15,7 +15,7 @@
   array.forEach(object => {do something to each object}) --> changes each object
   array.unshift(variable) --> puts variable at beginning of array
   array.push(variable) --> pushes variable to end of array
-  array.splice(index) --> removes value at said index
+  array.splice(index, number of elements, replace) --> removes value at said index and can replace
 
 <!-- SECTION Object Methods -->
   let object = { ...previous object } --> dumps all previous object into object
