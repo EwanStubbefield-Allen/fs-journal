@@ -5,7 +5,7 @@
   let variable = array.findIndex(object => conditional) --> returns the object's index that meets condition
   let variable = array.filter(object => conditional) --> creates array with all objects that meet condition
   let variable = array.sort((a, b) => a.key - b.key) --> creates array that sorts objects based on key
-  let variable = array.map(object => math/conditional) --> combines all content with math
+  let variable = array.map(object => operation) --> combines all content with said operation
   let variable = array.shift() --> removes first item from array and stores it
   let variable = array.pop() --> removes last item from array and stores it
   let variable = array.slice(firstPosition, lastPosition) --> returns section from firstPosition to last
@@ -52,3 +52,10 @@
   setInterval(function or {() => code}, ms) --> runs function repeatedly every ms
   let function = (condition) => {} --> equivalent to a function
   let variable = condition ? val1 : val2 --> if true return var1 if false return val2
+
+<!-- SECTION Errors -->
+  try {
+    throw new Error()
+  } catch (error) {
+    runs when error is thrown
+  }
