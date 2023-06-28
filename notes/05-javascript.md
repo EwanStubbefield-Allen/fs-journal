@@ -47,7 +47,7 @@
 <!-- SECTION Date Methods -->
   new Date('date') --> returns specified date else current date
   Date.toLocaleString() --> formats date into standard format
-  
+
 <!-- SECTION Special Functions -->
   setInterval(function or {() => code}, ms) --> runs function repeatedly every ms
   let function = (condition) => {} --> equivalent to a function
@@ -59,3 +59,14 @@
   } catch (error) {
     runs when error is thrown
   }
+
+  <!-- SECTION HTML Editor -->
+  let elem = document.getElementById('id') --> gets the id of teg
+    elem.querySelector('tag'). gets said tag within the elem 
+    elem.innerHTML('HTML') --> replaces HTML within tag with HTML
+    elem.innerText('string') --> replaces text within tag with string
+    elem.setAttribute('attribute', 'value') --> adds attribute to tag with set value
+    elem.removeAttribute('attribute') --> removes attribute from tag
+    let class = elem.classList --> gets class list within tag
+      class.add('class') --> adds a class to tag
+      class.remove('class') --> removes a class from tag

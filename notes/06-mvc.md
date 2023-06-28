@@ -35,7 +35,9 @@ Constructor --> Runs on class initialization
     Constructor(data) {
       this.name = data.name
     }
-    get template() {return `html`}
+    get template() {return}
+    
+    static get name() {return}
   }
 
 <!-- SECTION Import/Export -->
