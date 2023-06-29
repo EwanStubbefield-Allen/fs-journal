@@ -46,7 +46,9 @@
 
 <!-- SECTION Date Methods -->
   new Date('date') --> returns specified date else current date
-  Date.toLocaleString() --> formats date into standard format
+  Date.toLocaleString() --> formats date and time into standard format
+  Date.toLocaleDateString() --> formats just date into standard format
+  Date.toLocaleTimeString() --> formats just time into standard format
 
 <!-- SECTION Special Functions -->
   setInterval(function or {() => code}, ms) --> runs function repeatedly every ms
@@ -61,6 +63,8 @@
   }
 
   <!-- SECTION HTML Editor -->
+  let tag = document.tag
+    tag.style.property = ''
   let elem = document.getElementById('id') --> gets the id of teg
     elem.querySelector('tag'). gets said tag within the elem 
     elem.innerHTML('HTML') --> replaces HTML within tag with HTML
