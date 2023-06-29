@@ -36,7 +36,6 @@ Constructor --> Runs on class initialization
       this.name = data.name
     }
     get template() {return}
-    
     static get name() {return}
   }
 
