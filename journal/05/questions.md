@@ -1,11 +1,17 @@
 # Intro to Server side concerns with JavaScript
 01. What do the letters of the acronym `CRUD` stand for?
 
-  > | ANSWER HERE |
+  > C = Create
+    R = Read
+    U = Update
+    D = Delete
 
 02. Each action that `CRUD` represents maps to an HTTP request. What HTTP request does each `CRUD` action correspond to?
 
-  > | ANSWER HERE |
+  > C = post
+    R = get
+    U = put
+    D = delete
 
 03. What does `ORM` stand for? Which `ORM` do we use when interacting with MongoDB
 
@@ -33,7 +39,7 @@
 
 09. Demonstrate the pattern that is used to include a request query with the client's `HTTP` request providing the property `tag` and the value `winter`.
 
-  > | ANSWER HERE |
+  > ?tag=winter
 
 10. What is a ***virtual property***?
 
