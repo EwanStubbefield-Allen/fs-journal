@@ -63,11 +63,11 @@
 <!-- SECTION Service -->
   class Service {
     async getFunction() {
-      const data = await dbContext.Collection.find()
+      const data = await dbContext.Collection.find({ key: value }) --> arguments filter for value
       return data
     }
     async getFunctionById(id) {
-      const data = await dbContext.Collection.findById(id)
+      const data = await dbContext.Collection.findById(id).populate('arguments')
       if (!data) {
         throw new BadRequest('message')
       }
@@ -75,11 +75,12 @@
     }
     async createFunction(data) {
       const variable = await dbContext.Collection.create(data)
+      await nameSchema.populate('collection', 'key1 key2') --> puts collection in data gives id by default
       return variable
     }
     async updateFunction(dataId, userId, update) {
       const original = await this.getFunctionById(dataId)
-      if (variable.creatorId.toString() != userId) {
+      if (update.creatorId.toString() != userId) {
         throw new Forbidden('message')
       }
       original.value = update.value || original.value
@@ -105,5 +106,12 @@
     property: { type: Number, max: , min: }
     property: { type: Boolean, default: false }
     property: { type: String, enum: [options] }
-    creatorId: { type: Schema.type.ObjectId, required: true }
+    creatorId: { type: Schema.type.ObjectId, required: true, ref: 'Collection' }
   }, { timestamps:true, toJSON: { virtuals: true } })
+
+  nameSchema.virtuals('collection', {
+    localField: 'collectionId',
+    foreignField: '_id',
+    justOne: boolean,
+    ref: 'Collection'
+  })
