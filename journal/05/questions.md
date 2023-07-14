@@ -15,7 +15,7 @@
 
 03. What does `ORM` stand for? Which `ORM` do we use when interacting with MongoDB
 
-  > Object-relational mapping which
+  > Object-relational mapping which we use mongoose when interacting with MongoDB
 
 04. Which two `HTTP` request types include a body?
 
@@ -45,4 +45,4 @@
 
 10. What is a ***virtual property***?
 
-  > | ANSWER HERE |
+  > A virtual property adds fields that gets extra information for the schema.
