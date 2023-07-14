@@ -63,7 +63,7 @@
 <!-- SECTION Service -->
   class Service {
     async getFunction() {
-      const data = await dbContext.Collection.find({ key: value }) --> arguments filter for value
+      const data = await dbContext.Collection.find({ key: value }) --> arguments filter for value or use query
       return data
     }
     async getFunctionById(id) {
@@ -75,7 +75,7 @@
     }
     async createFunction(data) {
       const variable = await dbContext.Collection.create(data)
-      await nameSchema.populate('collection', 'key1 key2') --> puts collection in data gives id by default
+      await nameSchema.populate('variable', 'key1 key2') --> puts collection in data gives id by default
       return variable
     }
     async updateFunction(dataId, userId, update) {
@@ -102,16 +102,19 @@
 
 <!-- SECTION Model -->
   export const nameSchema = new Schema({
-    property: { type: String, required: true, maxlength: , minlength: },
-    property: { type: Number, max: , min: }
+    property: { type: String, required: true, minlength: , maxlength: },
+    property: { type: Number, min: , max: }
     property: { type: Boolean, default: false }
     property: { type: String, enum: [options] }
     creatorId: { type: Schema.type.ObjectId, required: true, ref: 'Collection' }
   }, { timestamps:true, toJSON: { virtuals: true } })
 
-  nameSchema.virtuals('collection', {
-    localField: 'collectionId',
+  nameSchema.virtual('variable', {
+    localField: 'refId',
     foreignField: '_id',
     justOne: boolean,
-    ref: 'Collection'
+    ref: 'Collection',
+    count: boolean
   })
+
+  nameSchema.index({ refId: 1, accountId: 1 }, { unique: true }) --> Prevents account from creating multiple
