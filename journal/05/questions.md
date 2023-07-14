@@ -28,16 +28,16 @@
 06. What are the three types of data relationships? Provide an example of each.
 
   > One-to-One: Person and their address
-    One-to-Many: Author and books they have written
+    One-to-Many: Books and its pages
     Many-to-Many: Genre and books
 
 07. What is middleware?
 
-  > | ANSWER HERE |
+  > Middleware serves as a communication between the database and the application.
 
 08. The ______ pipeline delivers information from the client while the ______ pipeline returns it. Fill in the blanks. 
 
-  > | ANSWER HERE |
+  > request, and response
 
 09. Demonstrate the pattern that is used to include a request query with the client's `HTTP` request providing the property `tag` and the value `winter`.
 
