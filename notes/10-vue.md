@@ -1,22 +1,48 @@
 # Vue
 
-<!-- SECTION Pages -->
-  HTML:
+<!-- SECTION HTML -->
+  V-:
     @ = v-on
-    @click="" --> Calls function on click
-    v-for="variable in array" --> repeats code for each array variable
+      @click="function()" --> Calls function on click
+      @submit="function()" --> Calls function on submit
+      @submit.prevent="function()" --> Calls function on submit and prevents default
     v-if="conditional" --> only runs if conditional is true
-    :key="variable.key" --> gives view a unique identifier for each variable (collin binds property)
-    :class="{ 'key': conditional }" --> if conditional is true applies key to class
-    :property="JavaScript" --> collin allows JavaScript
-    {{ variable }} --> inject JavaScript variable into HTML
+    v-elseif="conditional" --> runs if conditional is true and all prior v-ifs are false
+    v-else --> runs if all v-ifs are false
+    v-show="conditional" --> is similar to v-if but only hides content
+    v-model="object.variable" --> creates two way data binding
+    v-for="variable in array" --> repeats code for each array variable
+      :key="variable.key" --> gives view a unique identifier for each variable  
+  :class="{ 'key': conditional }" --> if conditional is true applies key to class
+  :attribute="JavaScript" --> collin allows JavaScript
 
-  JavaScript:
+  {{ variable }} --> inject JavaScript variable into HTML
+  <Component :nameProp="variable"> --> Calls component and gives a prop
+  <router-link :to="{ name: 'Name', params: { id: variable } }"></router-link> --> Goes to said page when clicked on content and can append a param
+
+<!-- SECTION JavaScript -->
+  export default {
+    props: {
+      nameProp: { type: Class, required: bool } --> Defines prop that is passed from parent
+    },
     setup() { --> Private variables/functions
-      let variable = ref(value) --> Adds a listener and will update HTML (probably better to use reactive)
+      let object = ref({}) --> Adds two way data binding
+      const route = useRoute() --> Gets the route the user is on
+      onMounted(() => {}) --> The constructor of view
+      onUnmounted(() => {}) --> When page is closed
       return { --> public variables/functions
         newVariable: AppState.variable, --> gets variable from appState and can rename it
         newVariable: computed(() => { return AppState.variable }), --> Allows newVariable to be reactive
-        newVariable.value --> Gets the variable value
       }
+      components: { Component }
     }
+  }
+
+<!-- SECTION Router -->
+  const routes = {
+    {
+      path: '/name/:id'
+      name: 'Name'
+      component: loadPage('NamePage')
+    }
+  }
