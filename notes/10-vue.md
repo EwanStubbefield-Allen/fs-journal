@@ -17,19 +17,22 @@
   :attribute="JavaScript" --> collin allows JavaScript
 
   {{ variable }} --> inject JavaScript variable into HTML
-  <Component :nameProp="variable"> --> Calls component and gives a prop
+  <Component :nameProp="variable"></Component> --> Calls component and gives a prop
   <router-link :to="{ name: 'Name', params: { id: variable } }"></router-link> --> Goes to said page when clicked on content and can append a param
+  <slot name:"name"></slot> --> Takes HTML from the parent and inserts it
+  <template #name></template> --> Specifies which slot 
 
 <!-- SECTION JavaScript -->
   export default {
     props: {
-      nameProp: { type: Class, required: bool } --> Defines prop that is passed from parent
+      nameProp: { type: Type, required: bool } --> Defines prop that is passed from parent
     },
-    setup() { --> Private variables/functions
+    setup(props) { --> Private variables/functions and passes props through
       let object = ref({}) --> Adds two way data binding
       const route = useRoute() --> Gets the route the user is on
       onMounted(() => {}) --> The constructor of view
       onUnmounted(() => {}) --> When page is closed
+      watchEffect(() => {conditional}) --> Continuously checks to see if conditional is true
       return { --> public variables/functions
         newVariable: AppState.variable, --> gets variable from appState and can rename it
         newVariable: computed(() => { return AppState.variable }), --> Allows newVariable to be reactive
