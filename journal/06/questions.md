@@ -21,7 +21,7 @@
 
 06. Which component in Vue does the vue-router use to mount pages onto?
 
-  > | ANSWER HERE |
+  > The vue-router uses main.js to mount pages onto it.
 
 07. What is the difference between the `AppState` and the state object within a component?
 
@@ -37,4 +37,4 @@
 
 10. What is the Vue method used to create watchable objects such as `state` or `AppState`?
 
-  > | ANSWER HERE |
+  > The method used to create watchable objects is reactive()
