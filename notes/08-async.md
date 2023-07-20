@@ -12,6 +12,11 @@
   R --> read
   async getApi() {
     const res = await api.get('adds at end of base url')
+    const res = await api.get('url', {
+      params: {
+        key: value
+      }
+    })
     AppState.variable = res.data.map(r => new Class(r))
     AppState.emit('variable')
   }
