@@ -1,7 +1,7 @@
 # Single Page Applications with Vue
 01. What is the entrypoint of an application?
 
-  > | ANSWER HERE |
+  > main.js is the entrypoint of an application.
 
 02. What is the difference between a vue `component` and `page`?
 
@@ -21,7 +21,7 @@
 
 06. Which component in Vue does the vue-router use to mount pages onto?
 
-  > The vue-router uses main.js to mount pages onto it.
+  > The vue-router uses main.js to mount pages onto it with a .mount().
 
 07. What is the difference between the `AppState` and the state object within a component?
 
