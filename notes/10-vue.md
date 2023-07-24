@@ -30,7 +30,8 @@
     },
     setup(props) { --> Private variables/functions and passes props through
       let object = ref({}) --> Adds two way data binding
-      const route = useRoute() --> Gets the url the user is on
+      const route = useRoute() --> Gets the current url
+      const router = useRouter() --> Manipulates the url
       const nameId = route.params.nameId --> Gets the params from the url
       onMounted(() => {}) --> The constructor of view
       onUnmounted(() => {}) --> When page is closed
