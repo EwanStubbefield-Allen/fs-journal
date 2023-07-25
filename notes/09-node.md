@@ -67,7 +67,13 @@
       return data
     }
     async getFunctionById(id) {
-      const data = await dbContext.Collection.findById(id).populate('arguments')
+      const data = await dbContext.Collection.findById(id)
+        .populate({
+          path: 'collection',
+          populate: {
+            path: 'differentCollection' --> Gets the virtual from the previous collection
+          }
+        })
       if (!data) {
         throw new BadRequest('message')
       }
@@ -110,8 +116,8 @@
   }, { timestamps:true, toJSON: { virtuals: true } })
 
   nameSchema.virtual('variable', {
-    localField: 'refId',
-    foreignField: '_id',
+    localField: 'nameId',
+    foreignField: 'refId',
     justOne: boolean,
     ref: 'Collection',
     count: boolean

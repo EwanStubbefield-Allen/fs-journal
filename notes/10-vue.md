@@ -15,7 +15,7 @@
     : = v-bind:
       :key="variable.key" --> Gives view a unique identifier for each variable used after v-for
       :class="{ 'key': conditional }" --> If conditional is true applies key to class
-      :attribute="JavaScript" --> Collin allows JavaScript
+      :attribute="JavaScript" --> Colon allows JavaScript
 
   {{ variable }} --> Inject JavaScript variable into HTML
   <Component :nameProp="variable"></Component> --> Calls component and gives a prop
@@ -53,5 +53,6 @@
       path: '/name/:id'
       name: 'Name'
       component: loadPage('NamePage')
+      beforeEnter: authGuard/authSettled --> authGuard only allows page access if logged in whereas authSettled will wait until account information is confirmed then loads page
     }
   }
