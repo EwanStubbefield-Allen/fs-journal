@@ -56,3 +56,40 @@
       beforeEnter: authGuard/authSettled --> authGuard only allows page access if logged in whereas authSettled will wait until account information is confirmed then loads page
     }
   }
+
+<!-- SECTION Vue Tour -->
+  main.js
+    import Vue3Tour from 'vue3-tour'
+    import 'vue3-tour/dist/vue3-tour-css'
+    rout
+      .use(Vue3Tour) --> Above mount
+
+  .vue
+    id="v-step-0"/class="v-step-1"/data-v-step="2" --> can be any id/class that is unique
+    <v-tour name="myTour" :steps="steps" :callbacks="tourCallBacks"></v-tour>
+    export default{
+      name: 'myTour',
+      setup() {
+        return {
+          steps: [
+            {
+              target: '#v-step-0'/'.v-step-1'/'[data-v-step="2"]',
+              header: {
+                title: 'String',
+              },
+              content: 'String' --> able to add html tags,
+              params: {
+                placement: 'top-end'
+              }
+            }
+          ],
+          tourCallBacks: {
+            onSkip(() => {})
+            onFinish: (() => {})
+          }        
+        }
+      },
+      mounted: function () {
+        this.$tours['myTour'].start()
+      }
+    }
