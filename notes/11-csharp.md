@@ -26,6 +26,10 @@
   list.Add(3); --> Adds 3 to List
   list.Remover(3); --> Removes first instance from List
   list.Find(l => conditional) --> Returns first item that matches condition
+  list.AddRange(listB) --> Adds another list to original list
+  list.BinarySearch() --> Returns the index of a value that matches the params
+  list.Clear() --> Removes all items from list
+  list.Contains() --> Returns true if list contains value
 
   foreach(int l in list)
   {}
@@ -40,16 +44,16 @@
   public class NamesController : ControllerBase --> : is inheritance
   {
     private readonly NamesService _namesService; --> Readonly is const
-    public NamesController(NamesService _namesService)
+    public NamesController(NamesService namesService) --> Constructor
     {
-      _namesService = namesService
+      _namesService = namesService; --> Implied this
     }
     [HttpGet] --> Decorator to say what kind of request
     public ActionResult<List> GetNames() --> Must return type
     {
       try
       {
-        List<T> names = _namesService.GetNames()
+        List<T> names = _namesService.GetNames();
         return Ok(name);
       }
       catch (Exception e)
@@ -62,38 +66,52 @@
     {
       try
       {
-        Name name = _namesService.GetNameById(type nameId);
-        return Ok(name)
+        Type name = _namesService.GetNameById(type nameId);
+        return Ok(name);
       }
       catch (Exception e)
       {
-        return BadRequest(e.message)
+        return BadRequest(e.message);
       }
     }
     [HttpPost]
-    public ActionResult<T> CreateName([FromBody] Name nameData)
+    public ActionResult<T> CreateName([FromBody] Type nameData)
     {
       try
       {
-        Name name = _namesService.CreateName(nameData)
-        return Ok(name)
+        Type name = _namesService.CreateName(nameData);
+        return Ok(name);
       }
       catch (Exception e)
       {
-        return BadRequest(e.message)
+        return BadRequest(e.message);
+      }
+    }
+    [HttpPut("{nameId}")]
+    public ActionResult<T> UpdateName(Type nameId, [FromBody] Type nameData)
+    {
+      try
+      {
+        nameData.Id = nameId;
+        Name name = _namesService.UpdateName(nameData);
+        return Ok(name);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.message);
       }
     }
     [HttpDelete("{nameId}")]
-    public ActionResult<T> RemoveName(type nameId)
+    public ActionResult<string> RemoveName(Type nameId)
     {
       try
       {
-        Name name = _namesService.RemoveName(nameId)
-        return Ok(name)
+        Type name = _namesService.RemoveName(nameId);
+        return Ok("Name was deleted");
       }
       catch (Exception e)
       {
-        return BadRequest(e.message)
+        return BadRequest(e.message);
       }
     }
   }
@@ -106,68 +124,92 @@
     {
       _namesRepository = namesRepository;
     }
-    internal List<T> GetNames()
+    internal List<T> GetNames() --> internal is only public to assembly
     {
       List<T> names = _namesRepository.GetNames();
-      return names
+      return names;
     }
     internal Name GetNameById(Type nameId)
     {
       if (name == null)
       {
-        throw new Exception("Error")
+        throw new Exception($"[NO NAME MATCHES THE ID: {nameId}]");
       }
       return name;
     }
-    internal Name CreateName(Name nameData)
+    internal Name CreateName(Type nameData)
     {
-      Name name = _namesRepository.CreateName(nameData)
-      return name
+      Type nameId = _namesRepository.CreateName(nameData);
+      Type name = GetNameById(nameId);
+      return name;
     }
-    internal Name RemoveName(Type nameId)
+    internal Name UpdateName(Type nameData)
     {
-      Name name = _namesRepository.RemoveName(nameId)
-      return name
+      Type originalName = GetNameById(nameDataId);
+      originalName.Value = nameData.Value ?? original.Value;
+      Type name = _namesRepository.UpdateName(originalName);
+      return name;
+    }
+    internal Type RemoveName(Type nameId)
+    {
+      Type name = GetNameById(nameId);
+      _namesRepository.RemoveName(nameId);
+      return name;
     }
   }
 
 <!-- SECTION Repository -->
   public class NamesRepository
   {
-    private List<T> names; --> Temp
-    public NamesRepository()
+    private readonly IDbConnection _db;
+    public NamesRepository(IDbConnection db)
     {
-      names = new List<T>();
-      names.Add(new Name("name", ets.));
+      _db = db;
     }
     internal List<T> GetNames()
     {
-      return names
+      string sql = "SELECT * FROM table_name;";
+      List<T> name = _db.Query<T>(sql).ToList();
+      return name;
     }
-    internal Name GetNamesById(nameId)
+    internal Name GetNamesById(Type nameId)
     {
-      Name name = names.Find(n => n.id == nameId);
-      return name
+      string sql = $"SELECT * FROM table_name WHERE id = @nameId;"; --> @ sanitizes strings
+      Type name = _db.QueryFirstOrDefault<T>(sql, new { nameId });
+      return name;
     }
-    internal Name CreateName(Name nameData)
+    internal Type CreateName(Type nameData)
     {
-      Names.Add(nameData)
-      return nameData
+      string sql = @" --> Allows multiline string
+      INSERT INTO table_name ( column, etc. )
+      VALUES ( @Value, etc. );
+      SELECT LAST_INSERT_ID();
+      ;";
+      Type nameId = _db.ExecuteScalar<T>(sql, nameData); --> Runs sql command and returns one value
+      return nameId;
     }
-    internal Name RemoveName(Type nameId)
+    internal Type UpdateName(Type originalName)
     {
-      Name nameData = GetNameById(nameId)
-      Names.Remove(nameData)
-      return nameData
+      string sql = @"
+      UPDATE table_name SET
+      column = @Value
+      WHERE id = @Id LIMIT 1;
+      SELECT * FROM table_name WHERE id = @Id
+      ;";
+      Type name = _db.QueryFirstOrDefault(sql, originalName);
+      return name;
+    }
+    internal void RemoveName(Type nameId)
+    {
+      string sql = "DELETE FROM table_name WHERE id = @nameId LIMIT 1;";
+      _db.Execute(sql, new { nameId });
     }
   }
 
 <!-- SECTION Model -->
   public class Name
   {
-    public type Name { get; set; } --> Declaring variables 
-    public Name(type name, etc.) --> Constructor
-    {
-      Name = name; --> Implied this
-    }
+    public type Value { get; set; } --> Declaring variables
+    public int? Number { get; set; } --> If no number then it set number to null
+    public bool? Boolean { get; set; } --> If no bool then it set bool to null
   }
