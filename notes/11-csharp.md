@@ -39,14 +39,17 @@
   services.AddScoped<NamesService>();
 
 <!-- SECTION Controller -->
+  [Authorize] --> All requests require auth
   [ApiController]
   [Route("api/controller")] --> super controller is Name but lowercased
   public class NamesController : ControllerBase --> : is inheritance
   {
     private readonly NamesService _namesService; --> Readonly is const
-    public NamesController(NamesService namesService) --> Constructor
+    private readonly Auth0Provider _auth0Provider
+    public NamesController(NamesService namesService, Auth0Provider auth0provider) --> Constructor
     {
       _namesService = namesService; --> Implied this
+      _auth0Provider = auth0Provider;
     }
     [HttpGet] --> Decorator to say what kind of request
     public ActionResult<List> GetNames() --> Must return type
@@ -66,7 +69,7 @@
     {
       try
       {
-        Type name = _namesService.GetNameById(type nameId);
+        Type name = _namesService.GetNameById(nameId);
         return Ok(name);
       }
       catch (Exception e)
@@ -75,10 +78,13 @@
       }
     }
     [HttpPost]
-    public ActionResult<T> CreateName([FromBody] Type nameData)
+    [Authorize]
+    public async Task<ActionResult<T>> CreateName([FromBody] Type nameData)
     {
       try
       {
+        Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+        nameData.accountId = userInfo.id;
         Type name = _namesService.CreateName(nameData);
         return Ok(name);
       }
@@ -88,10 +94,13 @@
       }
     }
     [HttpPut("{nameId}")]
-    public ActionResult<T> UpdateName(Type nameId, [FromBody] Type nameData)
+    [Authorize]
+    public Task<ActionResult<T>> UpdateName(Type nameId, [FromBody] Type nameData)
     {
       try
       {
+        Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+        nameData.accountId = userInfo.id;
         nameData.Id = nameId;
         Name name = _namesService.UpdateName(nameData);
         return Ok(name);
@@ -102,11 +111,13 @@
       }
     }
     [HttpDelete("{nameId}")]
+    [Authorize]
     public ActionResult<string> RemoveName(Type nameId)
     {
       try
       {
-        Type name = _namesService.RemoveName(nameId);
+        Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+        Type name = _namesService.RemoveName(nameId, userInfo.id);
         return Ok("Name was deleted");
       }
       catch (Exception e)
@@ -126,33 +137,31 @@
     }
     internal List<T> GetNames() --> internal is only public to assembly
     {
-      List<T> names = _namesRepository.GetNames();
-      return names;
+      return _namesRepository.GetNames();
     }
-    internal Name GetNameById(Type nameId)
+    internal Type GetNameById(Type nameId)
     {
-      if (name == null)
-      {
-        throw new Exception($"[NO NAME MATCHES THE ID: {nameId}]");
-      }
-      return name;
+      Type name = _namesRepository.GetNameById(nameId)
+      return name ?? throw new Exception($"[NO NAME MATCHES THE ID: {nameId}]");
     }
-    internal Name CreateName(Type nameData)
+    internal Type CreateName(Type nameData)
     {
       Type nameId = _namesRepository.CreateName(nameData);
-      Type name = GetNameById(nameId);
-      return name;
+      return GetNameById(nameId);
     }
-    internal Name UpdateName(Type nameData)
+    internal Type UpdateName(Type nameData)
     {
       Type originalName = GetNameById(nameDataId);
       originalName.Value = nameData.Value ?? original.Value;
-      Type name = _namesRepository.UpdateName(originalName);
-      return name;
+      return _namesRepository.UpdateName(originalName);
     }
-    internal Type RemoveName(Type nameId)
+    internal Type RemoveName(Type nameId, string accountId)
     {
       Type name = GetNameById(nameId);
+      if (name.accountId != accountId)
+      {
+        throw new Exception("[YOU ARE NOT THE CREATOR OF THIS!]")
+      }
       _namesRepository.RemoveName(nameId);
       return name;
     }
@@ -168,15 +177,33 @@
     }
     internal List<T> GetNames()
     {
-      string sql = "SELECT * FROM table_name;";
-      List<T> name = _db.Query<T>(sql).ToList();
-      return name;
+      string sql = @"
+      SELECT tab.* , acc.*
+      FROM table_name tab
+      JOIN accounts acc ON acc.id = tab.accountId
+      ;";
+      return _db.Query<T, Profile, T>( --> First two what you get and last what you give
+      sql,
+      (name, profile) => { --> Maps name and profile to combine into nested object
+        name.profile = profile;
+        return name;
+      }
+      ).ToList();
     }
-    internal Name GetNamesById(Type nameId)
+    internal Type GetNamesById(Type nameId)
     {
-      string sql = $"SELECT * FROM table_name WHERE id = @nameId;"; --> @ sanitizes strings
-      Type name = _db.QueryFirstOrDefault<T>(sql, new { nameId });
-      return name;
+      string sql = @"
+      SELECT tab.* , acc.*
+      FROM table_name tab
+      JOIN accounts acc ON acc.id = tab.accountId
+      WHERE tab.id = @nameId;"; --> @ sanitizes strings
+      return _db.Query<T, Profile, T>( --> Use query because multiple tables(T and profile)
+        sql, 
+        (name, profile) => {
+          name.profile = profile;
+          return name
+        }
+        new { nameId }).FirstOrDefault();
     }
     internal Type CreateName(Type nameData)
     {
@@ -185,8 +212,7 @@
       VALUES ( @Value, etc. );
       SELECT LAST_INSERT_ID();
       ;";
-      Type nameId = _db.ExecuteScalar<T>(sql, nameData); --> Runs sql command and returns one value
-      return nameId;
+      return _db.ExecuteScalar<T>(sql, nameData); --> Runs sql command and returns one value
     }
     internal Type UpdateName(Type originalName)
     {
@@ -212,4 +238,5 @@
     public type Value { get; set; } --> Declaring variables
     public int? Number { get; set; } --> If no number then it set number to null
     public bool? Boolean { get; set; } --> If no bool then it set bool to null
+    public Profile profile { get; set; } --> Allows nested objects
   }

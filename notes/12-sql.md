@@ -2,22 +2,32 @@
 
 <!-- SECTION Commands -->
   CREATE TABLE table_name(column ATTRIBUTES, etc.) --> Creates table
+
   DROP TABLE table_name --> Deletes table
+
   INSERT INTO --> Adds row to table
     table_name ( column, etc. ) --> States order of values
     VALUES ( 'value', etc. ) --> Gives values (can do multiple times)
-  SELECT column, column FROM table_name --> Returns all values from given columns or * to return table
+
+  SELECT tab.* , tab2.* --> Returns all from said table can be colum or *, Aliased tables determines order
+    FROM table_name tab --> Tab creates an alias
+    JOIN table_name_2 tab2 --> Adds another table
+    ON tab.id = tab2.id --> Matches rows that share same values
     WHERE conditional --> Returns row where conditional is true
     LIMIT 2 OFFSET 1 --> Gets only specified amount offset by amount
+
   UPDATE table_name SET --> Changes value of said column where conditional is true
     column = value
     WHERE conditional
     LIMIT 2 OFFSET 1
+
   DELETE FROM table_name --> Deletes row where conditional is true
     WHERE conditional
     LIMIT 2 OFFSET 1
+
   ALTER TABLE table_name
     ADD column ATTRIBUTES --> Adds new column to table
+
   SELECT LAST_INSERT_COLUMN(); Gets the last create row's value from said column
 
 <!-- SECTION Data types -->
@@ -28,6 +38,7 @@
   BOOLEAN --> True and False
   DATE --> Just date (YYYY-MM-DD)
   DATETIME --> Date and Time
+  ENUM('string', etc.) --> Enumerator
 
 <!-- SECTION Attributes -->
   NOT NULL --> Value cannot be null (required)
@@ -37,4 +48,6 @@
   ON UPDATE --> When table is edited updates value with following statement
   AUTO_INCREMENT --> Increments value with each new value
   COMMENT --> Description for dev
+  FOREIGN KEY(value) REFERENCES table_name(column) --> Requires value to match a value in said column
+  ON DELETE CASCADE --> On deleting row it deletes all referenced data providing no orphan data
   default charset utf8; --> Ends table and sets default font
