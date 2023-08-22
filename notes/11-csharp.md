@@ -187,8 +187,7 @@
       (name, profile) => { --> Maps name and profile to combine into nested object
         name.profile = profile;
         return name;
-      }
-      ).ToList();
+      }).ToList();
     }
     internal Type GetNamesById(Type nameId)
     {
@@ -233,10 +232,15 @@
   }
 
 <!-- SECTION Model -->
-  public class Name
+  public class Name : RepoItem<int>
   {
     public type Value { get; set; } --> Declaring variables
     public int? Number { get; set; } --> If no number then it set number to null
     public bool? Boolean { get; set; } --> If no bool then it set bool to null
     public Profile profile { get; set; } --> Allows nested objects
+  }
+
+  public abstract class RepoItem<T> --> Passes through what type id is
+  {
+    public T Id { get; set; }
   }

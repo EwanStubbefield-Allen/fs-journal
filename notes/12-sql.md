@@ -10,9 +10,12 @@
     VALUES ( 'value', etc. ) --> Gives values (can do multiple times)
 
   SELECT tab.* , tab2.* --> Returns all from said table can be colum or *, Aliased tables determines order
+    COUNT(tab3) AS nameCount --> Takes the count of how many are grouped
     FROM table_name tab --> Tab creates an alias
     JOIN table_name_2 tab2 --> Adds another table
     ON tab.id = tab2.id --> Matches rows that share same values
+    LEFT JOIN table_name_3 tab3 ON tab3.id = tab.id --> Left join shows tab even when no tab3 is associated
+    GROUP BY tab.id --> Groups table that has many tab.id's
     WHERE conditional --> Returns row where conditional is true
     LIMIT 2 OFFSET 1 --> Gets only specified amount offset by amount
 
@@ -50,4 +53,5 @@
   COMMENT --> Description for dev
   FOREIGN KEY(value) REFERENCES table_name(column) --> Requires value to match a value in said column
   ON DELETE CASCADE --> On deleting row it deletes all referenced data providing no orphan data
+  UNIQUE (value, otherValue) --> Only have one version of this combination
   default charset utf8; --> Ends table and sets default font
