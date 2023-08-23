@@ -14,22 +14,23 @@
     int l = list[i];
   }
 
-  Console.WriteLine($"string {variable}")
+  Console.WriteLine($"string {variable}");
 
 <!-- SECTION String Methods -->
   char variable = 'v';
   string variable = "variable";
-  string.ToUpper() --> Uppercase all character
+  string.ToUpper(); --> Uppercase all character
 
 <!-- SECTION List Methods -->
   List<T> list = new List<T>(); --> Creates List with type
   list.Add(3); --> Adds 3 to List
   list.Remover(3); --> Removes first instance from List
-  list.Find(l => conditional) --> Returns first item that matches condition
-  list.AddRange(listB) --> Adds another list to original list
-  list.BinarySearch() --> Returns the index of a value that matches the params
-  list.Clear() --> Removes all items from list
-  list.Contains() --> Returns true if list contains value
+  list.Find(l => conditional); --> Returns first item that matches condition
+  list.FindAll(l => condition); --> Returns a list with elements that match condition
+  list.AddRange(listB); --> Adds another list to original list
+  list.BinarySearch(); --> Returns the index of a value that matches the params
+  list.Clear(); --> Removes all items from list
+  list.Contains(); --> Returns true if list contains value
 
   foreach(int l in list)
   {}
@@ -45,7 +46,7 @@
   public class NamesController : ControllerBase --> : is inheritance
   {
     private readonly NamesService _namesService; --> Readonly is const
-    private readonly Auth0Provider _auth0Provider
+    private readonly Auth0Provider _auth0Provider;
     public NamesController(NamesService namesService, Auth0Provider auth0provider) --> Constructor
     {
       _namesService = namesService; --> Implied this
@@ -160,7 +161,7 @@
       Type name = GetNameById(nameId);
       if (name.accountId != accountId)
       {
-        throw new Exception("[YOU ARE NOT THE CREATOR OF THIS!]")
+        throw new Exception("[YOU ARE NOT THE CREATOR OF THIS!]");
       }
       _namesRepository.RemoveName(nameId);
       return name;
@@ -180,8 +181,7 @@
       string sql = @"
       SELECT tab.* , acc.*
       FROM table_name tab
-      JOIN accounts acc ON acc.id = tab.accountId
-      ;";
+      JOIN accounts acc ON acc.id = tab.accountId;";
       return _db.Query<T, Profile, T>( --> First two what you get and last what you give
       sql,
       (name, profile) => { --> Maps name and profile to combine into nested object
@@ -209,8 +209,7 @@
       string sql = @" --> Allows multiline string
       INSERT INTO table_name ( column, etc. )
       VALUES ( @Value, etc. );
-      SELECT LAST_INSERT_ID();
-      ;";
+      SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<T>(sql, nameData); --> Runs sql command and returns one value
     }
     internal Type UpdateName(Type originalName)
@@ -219,8 +218,7 @@
       UPDATE table_name SET
       column = @Value
       WHERE id = @Id LIMIT 1;
-      SELECT * FROM table_name WHERE id = @Id
-      ;";
+      SELECT * FROM table_name WHERE id = @Id;";
       Type name = _db.QueryFirstOrDefault(sql, originalName);
       return name;
     }
