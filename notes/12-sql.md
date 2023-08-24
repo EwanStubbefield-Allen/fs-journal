@@ -16,6 +16,7 @@
     ON tab.id = tab2.id --> Matches rows that share same values
     LEFT JOIN table_name_3 tab3 ON tab3.id = tab.id --> Left join shows tab even when no tab3 is associated
     GROUP BY tab.id --> Groups table that has many tab.id's
+    ORDER BY tab.value ASC/DESC --> Sorts list of results either by ascending or descending order
     WHERE conditional --> Returns row where conditional is true
     LIMIT 2 OFFSET 1; --> Gets only specified amount offset by amount
 
